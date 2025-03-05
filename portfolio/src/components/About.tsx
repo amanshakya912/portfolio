@@ -1,5 +1,5 @@
-import bg1 from "../assets/bg1_2.png";
-import bg1mob from "../assets/bg1mob.png";
+// import bg1 from "../assets/bg1_2.png";
+// import bg1mob from "../assets/bg1mob.png";
 
 const About = () => {
   return (

@@ -1,8 +1,8 @@
-import React from "react";
+// import React from "react";
 import HomeScreen from "./components/HomeScreen";
 import Header from "./components/Header";
 import About from "./components/About";
-import Education from "./components/Education";
+// import Education from "./components/Education";
 
 const App = () => {
   return (

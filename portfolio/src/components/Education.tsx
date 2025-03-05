@@ -1,5 +1,5 @@
-import React from "react";
-import bg1 from "../assets/oc3.jpg"
+// import React from "react";
+// import bg1 from "../assets/oc3.jpg"
 const Education = () => {
   return (
     <>
