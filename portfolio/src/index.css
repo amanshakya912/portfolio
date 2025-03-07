@@ -6,3 +6,7 @@
   --font-cormorant: "Cormorant", serif;
   --font-karla: "Karla", sans-serif;
 }
+
+.swiper-slide {
+  display: flex !important;
+}
