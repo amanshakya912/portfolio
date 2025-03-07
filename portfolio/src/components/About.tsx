@@ -31,9 +31,7 @@ const About = () => {
             diligent B.Sc. CSIT student with a strong passion for learning and
             skill development. My journey into the tech world began with web
             development, where I gained hands-on experience working with React
-            using JavaScript and TypeScript. Currently, I am expanding my
-            expertise in mobile app development by learning and building
-            applications with React Native. <br /> I am always eager to take on
+            using JavaScript and TypeScript. Currently, I am expanding my expertise in various fields, including mobile app development by building applications with React Native, and full-stack web development using the MERN stack. <br /> I am always eager to take on
             new challenges, committed to delivering my best while continuously
             learning and growing through every opportunity that comes my way.
           </motion.p>
