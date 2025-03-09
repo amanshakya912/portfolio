@@ -11,7 +11,24 @@ import { Dialog } from "@headlessui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import { Navigation } from "swiper/modules";
-import login1 from "../assets/login.jpg"
+import login1 from "../assets/login.jpg";
+import reg1 from "../assets/reg.jpg";
+import hp from "../assets/hp.jpg";
+import hp1 from "../assets/hp1.jpg";
+import hp2 from "../assets/hp2.jpg";
+import hp3 from "../assets/hp3.jpg";
+import ca1 from "../assets/ca1.jpg";
+import ca2 from "../assets/ca2.jpg";
+import ca2_1 from "../assets/ca2_1.jpg";
+import ca3 from "../assets/ca3.jpg";
+import ca4 from "../assets/ca4.jpg";
+import ca4_1 from "../assets/ca4_1.jpg";
+import ca5 from "../assets/ca5.jpg";
+import ba1 from "../assets/ba1.jpg";
+import ba2 from "../assets/ba2.jpg";
+import pd1 from "../assets/pd.jpg";
+import pd2 from "../assets/pd2.jpg";
+import pd3 from "../assets/pd3.jpg";
 
 interface Project {
   name: string;
@@ -38,7 +55,26 @@ const projects: Record<string, Project[]> = {
         "A mobile auction system built with React Native & TypeScript.",
       github: "https://github.com/amanshakya912/oas-app",
       //   apk: "/path-to-apk-file.apk",
-      screenshots: [login1, "../src/assets/reg.jpg", "../src/assets/hp.jpg","../src/assets/hp1.jpg","../src/assets/hp2.jpg", "../src/assets/hp3.jpg","../src/assets/ca1.jpg", "../src/assets/ca2.jpg","../src/assets/ca2_1.jpg", "../src/assets/ca3.jpg", "../src/assets/ca4.jpg", "../src/assets/ca4_1.jpg", "../src/assets/ca5.jpg", "../src/assets/ba1.jpg","../src/assets/ba2.jpg","../src/assets/pd.jpg","../src/assets/pd2.jpg", "../src/assets/pd3.jpg",],
+      screenshots: [
+        login1,
+        reg1,
+        hp,
+        hp1,
+        hp2,
+        hp3,
+        ca1,
+        ca2,
+        ca2_1,
+        ca3,
+        ca4,
+        ca4_1,
+        ca5,
+        ba1,
+        ba2,
+        pd1,
+        pd2,
+        pd3,
+      ],
     },
   ],
   "Professional Projects": [
@@ -49,12 +85,14 @@ const projects: Record<string, Project[]> = {
     },
     {
       name: "Hope Fertility & Diagnostics",
-      description: "Doctor booking and appointment website built using Next.js and Laravel.",
+      description:
+        "Doctor booking and appointment website built using Next.js and Laravel.",
       website: "https://hopefd.com.np/",
     },
     {
       name: "Siddhartha Cable Car",
-      description: "Website for Siddhartha Cable Car built in Laravel framework.",
+      description:
+        "Website for Siddhartha Cable Car built in Laravel framework.",
       website: "https://siddharthacablecar.com.np/",
     },
     {
@@ -76,9 +114,14 @@ const Projects = () => {
   };
 
   return (
-    <div id="Projects" className=" py-16 bg-blue-950 text-white md:bg-cover bg-contain bg-no-repeat md:aspect-[16/9] aspect-[9/16] bg-[url('../src/assets/bg4mob.png')] md:bg-[url('../src/assets/bg4.png')]">
+    <div
+      id="Projects"
+      className=" py-16 bg-blue-950 text-white md:bg-cover bg-contain bg-no-repeat md:aspect-[16/9] aspect-[9/16] bg-[url('../src/assets/bg4mob.png')] md:bg-[url('../src/assets/bg4.png')]"
+    >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl text-center mb-10 font-cormorant">Projects</h2>
+        <h2 className="text-3xl md:text-4xl text-center mb-10 font-cormorant">
+          Projects
+        </h2>
 
         {/* Tabs */}
         <div className="flex justify-center mb-6 border-b border-blue-900 font-karla">
