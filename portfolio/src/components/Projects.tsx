@@ -11,6 +11,7 @@ import { Dialog } from "@headlessui/react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import { Navigation } from "swiper/modules";
+import login1 from "../assets/login.jpg"
 
 interface Project {
   name: string;
@@ -37,7 +38,7 @@ const projects: Record<string, Project[]> = {
         "A mobile auction system built with React Native & TypeScript.",
       github: "https://github.com/amanshakya912/oas-app",
       //   apk: "/path-to-apk-file.apk",
-      screenshots: ["../src/assets/login.jpg", "../src/assets/reg.jpg", "../src/assets/hp.jpg","../src/assets/hp1.jpg","../src/assets/hp2.jpg", "../src/assets/hp3.jpg","../src/assets/ca1.jpg", "../src/assets/ca2.jpg","../src/assets/ca2_1.jpg", "../src/assets/ca3.jpg", "../src/assets/ca4.jpg", "../src/assets/ca4_1.jpg", "../src/assets/ca5.jpg", "../src/assets/ba1.jpg","../src/assets/ba2.jpg","../src/assets/pd.jpg","../src/assets/pd2.jpg", "../src/assets/pd3.jpg",],
+      screenshots: [login1, "../src/assets/reg.jpg", "../src/assets/hp.jpg","../src/assets/hp1.jpg","../src/assets/hp2.jpg", "../src/assets/hp3.jpg","../src/assets/ca1.jpg", "../src/assets/ca2.jpg","../src/assets/ca2_1.jpg", "../src/assets/ca3.jpg", "../src/assets/ca4.jpg", "../src/assets/ca4_1.jpg", "../src/assets/ca5.jpg", "../src/assets/ba1.jpg","../src/assets/ba2.jpg","../src/assets/pd.jpg","../src/assets/pd2.jpg", "../src/assets/pd3.jpg",],
     },
   ],
   "Professional Projects": [
