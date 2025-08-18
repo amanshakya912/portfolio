@@ -11,6 +11,9 @@ import {
   faCss3Alt,
   faBootstrap,
   faGitAlt,
+  faDartLang,
+  faFlutter,
+  faDocker,
 } from "@fortawesome/free-brands-svg-icons";
 import { faDatabase, faCogs, faToolbox } from "@fortawesome/free-solid-svg-icons";
 
@@ -26,25 +29,32 @@ const skills: Record<string, Skill[]> = {
     { name: "TypeScript", icon: faJs },
     { name: "PHP", icon: faPhp },
     { name: "Python", icon: faPython },
+    { name: "Dart", icon: faDartLang },
   ],
   "Frontend Development": [
     { name: "React", icon: faReact },
     { name: "Next.js", icon: faReact },
-    { name: "React Native", icon: faReact },
     { name: "HTML", icon: faHtml5 },
     { name: "CSS", icon: faCss3Alt },
     { name: "Tailwind CSS", icon: faBootstrap },
   ],
   "Backend & API Development": [
+    { name: "Django", icon: faPython },
     { name: "Node.js", icon: faNodeJs },
     { name: "Express.js", icon: faNodeJs },
     { name: "Laravel", icon: faPhp },
   ],
+  "Mobile Application Development": [
+    { name: "React Native", icon: faReact },
+    { name: "Flutter", icon: faFlutter },
+  ],
   "Tools & Platforms": [
     { name: "Git", icon: faGitAlt },
+    { name: "Docker", icon: faDocker },
     { name: "Shopify", icon: faToolbox },
     { name: "Postman", icon: faDatabase },
     { name: "Electron", icon: faCogs },
+    { name: "Vendure", icon: faToolbox },
   ],
 };
 

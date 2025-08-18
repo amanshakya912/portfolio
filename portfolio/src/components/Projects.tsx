@@ -79,6 +79,11 @@ const projects: Record<string, Project[]> = {
   ],
   "Professional Projects": [
     {
+      name: "GKavach DWM",
+      description: "Dark Web Monitoring website built using Django and Next.js",
+      website: "https://dwm.gkavach.com/",
+    },
+    {
       name: "Lion's Club",
       description: "A social club website developed using React and Laravel.",
       website: "https://ktmudaya.org/",

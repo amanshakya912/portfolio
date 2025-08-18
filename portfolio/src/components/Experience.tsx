@@ -34,13 +34,36 @@ const experiences: Experience[] = [
       "Worked on AI projects for face detection and object detection.",
     ],
   },
+  {
+    title: "Software Developer intern",
+    company: "Green Tick Nepal Pvt. Ltd.",
+    duration: "March 2025 - July 2025",
+    responsibilities: [
+      "Developed and integrated REST APIs using Django, handling database interactions and connecting backend services with a Next.js frontend",
+      "Upgraded and maintained the Dark Web Monitoring (DWM) website, improving functionality and performance.",
+      "Built a cross-platform mobile application for the DWM system using Flutter, enhancing accessibility for users.",
+      "Created dark web monitoring reports to detect and analyze potential breaches for specified domains.",
+    ],
+  },
+  {
+    title: "Software Developer",
+    company: "Green Tick Nepal Pvt. Ltd.",
+    duration: "July 2025 - Present",
+    responsibilities: [
+      "Maintained and enhanced the Dark Web Monitoring (DWM) website, implementing new features and improvements for better performance and usability. ",
+      "Deployed and added new functionalities to the DWM mobile application, further enhancing the app’s capabilities using Kotlin.",
+    ],
+  },
 ];
 
 const Experience = () => {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   return (
-    <div id="Experience" className="py-16 bg-blue-950 flex items-center text-white bg-contain bg-no-repeat md:aspect-[16/9] aspect-[9/16] bg-[url('../src/assets/bg2_mob.png')] md:bg-[url('../src/assets/bg2.png')]">
+    <div
+      id="Experience"
+      className="py-16 bg-blue-950 flex items-center text-white bg-contain bg-no-repeat md:aspect-[16/9] aspect-[9/16] bg-[url('../src/assets/bg2_mob.png')] md:bg-[url('../src/assets/bg2.png')]"
+    >
       <div className="w-full max-w-6xl px-6 mx-auto">
         <h2 className="text-3xl sm:text-4xl text-center mb-12 font-cormorant tracking-wide text-white">
           Experience
@@ -106,7 +129,9 @@ const Experience = () => {
                             transition={{ duration: 0.3, delay: i * 0.1 }}
                             className="flex items-start space-x-3"
                           >
-                            <span className="text-gray-300 text-lg"><FontAwesomeIcon icon={faArrowRight}/></span>
+                            <span className="text-gray-300 text-lg">
+                              <FontAwesomeIcon icon={faArrowRight} />
+                            </span>
                             <span className="text-gray-300 leading-relaxed">
                               {resp}
                             </span>

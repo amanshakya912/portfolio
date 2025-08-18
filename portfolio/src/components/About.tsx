@@ -8,7 +8,7 @@ const About = () => {
   return (
     <div
       id="About"
-      className="relative flex items-center justify-center bg-blue-950 w-full bg-cover md:aspect-[16/9] aspect-[9/16] bg-[url('../src/assets/bg1mob.png')] md:bg-[url('../src/assets/bg1_2.png')] "
+      className="px-10 relative flex items-center justify-center bg-blue-950 w-full bg-cover md:aspect-[16/9] aspect-[9/16] bg-[url('../src/assets/bg1mob.png')] md:bg-[url('../src/assets/bg1_2.png')] "
     >
       <div className="z-50 grid md:grid-cols-6 grid-cols-1 px-5 w-full gap-10">
         {/* About Me Text Section */}
@@ -27,13 +27,15 @@ const About = () => {
             transition={{ duration: 1, delay: 0.5 }}
             className="text-white font-karla text-justify"
           >
-            <b>Hi there, I am Aman Shakya</b>, an enthusiastic, ambitious, and
-            diligent B.Sc. CSIT student with a strong passion for learning and
-            skill development. My journey into the tech world began with web
-            development, where I gained hands-on experience working with React
-            using JavaScript and TypeScript. Currently, I am expanding my expertise in various fields, including mobile app development by building applications with React Native, and full-stack web development using the MERN stack. <br /> I am always eager to take on
-            new challenges, committed to delivering my best while continuously
-            learning and growing through every opportunity that comes my way.
+            <b>Hi there, I am Aman Shakya</b>, an enthusiastic, ambitious and
+            diligent software developer with a strong background in web and
+            mobile application development who is consistently seeking
+            opportunities to learn and develop skills and knowledge. Skilled in
+            React, Next.js, Django, Laravel, and Flutter, with strong expertise
+            in API integration, backend services, and DevOps practices.
+            Passionate about building secure, scalable, and user-focused
+            applications while continuously learning and adapting to new
+            technologies.
           </motion.p>
         </motion.div>
 
@@ -65,7 +67,11 @@ const About = () => {
           >
             <div className="flex space-x-6 justify-center">
               {[
-                { icon: faPhone, link: "tel:+977-9818313576", title: "Call at +977-9818313576" },
+                {
+                  icon: faPhone,
+                  link: "tel:+977-9818313576",
+                  title: "Call at +977-9818313576",
+                },
                 {
                   icon: faGithub,
                   link: "https://github.com/amanshakya912",

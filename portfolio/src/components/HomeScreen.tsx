@@ -1,5 +1,5 @@
 import ocean from "../assets/ocean.mp4";
-import resume from "../assets/AmanShakya_CV.pdf"
+import resume from "../assets/AmanShakyaCV.pdf"
 const HomeScreen = () => {
   return (
     <div className="relative overflow-hidden h-screen w-full z-40">
