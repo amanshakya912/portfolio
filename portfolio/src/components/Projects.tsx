@@ -84,6 +84,11 @@ const projects: Record<string, Project[]> = {
       website: "https://dwm.gkavach.com/",
     },
     {
+      name: "GKavach DWM (Mobile Application",
+      description: "Dark Web Monitoring mobile application built using Flutter",
+      website: "https://play.google.com/store/apps/details?id=com.gkavach.gkavach_dwm",
+    },
+    {
       name: "Lion's Club",
       description: "A social club website developed using React and Laravel.",
       website: "https://ktmudaya.org/",
