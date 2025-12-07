@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 
 const educationData = [
   {
-    year: "2077 - Present",
+    year: "2082",
     degree: "Bachelor’s in Computer Science & IT",
-    college: "8th Semester at Academia International College",
+    college: "Academia International College",
     location: "Gwarko, Lalitpur",
   },
   {
