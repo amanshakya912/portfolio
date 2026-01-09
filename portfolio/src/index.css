@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tailwindcss-animated";
-@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Karla:ital,wght@0,200..800;1,200..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 
 @theme {
   --font-cormorant: "Cormorant", serif;

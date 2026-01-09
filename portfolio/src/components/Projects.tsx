@@ -86,7 +86,8 @@ const projects: Record<string, Project[]> = {
     {
       name: "GKavach DWM (Mobile Application)",
       description: "Dark Web Monitoring mobile application built using Flutter",
-      website: "https://play.google.com/store/apps/details?id=com.gkavach.gkavach_dwm",
+      website:
+        "https://play.google.com/store/apps/details?id=com.gkavach.gkavach_dwm",
     },
     {
       name: "Lion's Club",
@@ -115,145 +116,176 @@ const projects: Record<string, Project[]> = {
 
 const Projects = () => {
   const [activeTab, setActiveTab] = useState("Personal Projects");
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const openModal = (project: Project) => {
+  const openModal = (project: any) => {
     setSelectedProject(project);
     setIsOpen(true);
   };
 
   return (
-    <div
+    <section
       id="Projects"
-      className=" py-16 bg-blue-950 text-white md:bg-cover bg-contain bg-no-repeat md:aspect-[16/9] aspect-[9/16] bg-[url('../src/assets/bg4mob.png')] md:bg-[url('../src/assets/bg4.png')]"
+      className="relative bg-blue-950 text-white py-20
+        bg-no-repeat bg-cover
+        bg-[url('../src/assets/bg4mob.png')]
+        md:bg-[url('../src/assets/bg4.png')]"
     >
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl md:text-4xl text-center mb-10 font-cormorant">
+      {/* Overlay for readability */}
+      <div className="absolute inset-0 bg-blue-950/70" />
+
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Title */}
+        <h2 className="text-3xl md:text-4xl text-center font-cormorant">
           Projects
         </h2>
 
+        <div className="mx-auto my-6 h-0.5 w-28 bg-lnear-to-r from-transparent via-cyan-400 to-transparent" />
+
         {/* Tabs */}
-        <div className="flex justify-center mb-6 border-b border-blue-900 font-karla">
+        <div className="flex justify-center gap-6 mb-10 font-karla">
           {Object.keys(projects).map((tab) => (
             <button
               key={tab}
-              className={`cursor-pointer px-4 py-2 text-lg transition-all ${
-                activeTab === tab
-                  ? "border-b-2 border-blue-400 text-blue-400"
-                  : "text-white hover:text-gray-300"
-              }`}
               onClick={() => setActiveTab(tab)}
+              className={`relative px-4 py-2 text-lg transition-all cursor-pointer
+                ${
+                  activeTab === tab
+                    ? "text-cyan-300 after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-full after:bg-lnear-to-r after:from-cyan-300 after:to-blue-400"
+                    : "text-blue-200 hover:text-white"
+                }`}
             >
               {tab}
             </button>
           ))}
         </div>
 
-        {/* Project Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 font-karla">
+        {/* Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 font-karla">
           {projects[activeTab].map((proj, index) => (
             <motion.div
               key={index}
-              whileHover={{ scale: 1.05 }}
-              className="cursor-pointer bg-blue-900 p-6 rounded-lg shadow-md flex flex-col items-center transition-all hover:shadow-lg"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -6 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className="relative rounded-2xl p-px
+                bg-linear-to-br from-blue-400/30 via-cyan-300/10 to-transparent"
             >
-              <h4 className="text-xl font-semibold mb-2">{proj.name}</h4>
-              <p className="text-white text-sm text-center mb-4">
-                {proj.description}
-              </p>
+              <div
+                className="relative h-full rounded-2xl bg-blue-950/85
+                  backdrop-blur-lg border border-blue-800/50
+                  p-6 flex flex-col text-center"
+              >
+                {/* Soft glow */}
+                <div className="absolute inset-0 rounded-2xl opacity-0 hover:opacity-100 transition
+                  bg-linear-to-tr from-cyan-400/10 via-transparent to-transparent" />
 
-              <div className="flex space-x-4">
-                {proj.website && (
-                  <a
-                    href={proj.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={proj.website}
-                    className="text-blue-400 hover:text-blue-300"
-                  >
-                    <FontAwesomeIcon icon={faExternalLink} />
-                  </a>
-                )}
-                {proj.github && (
-                  <a
-                    href={proj.github}
-                    title={proj.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white hover:text-gray-300"
-                  >
-                    <FontAwesomeIcon icon={faGithub} />
-                  </a>
-                )}
-                {proj.apk && (
-                  <a
-                    href={proj.apk}
-                    download
-                    className="text-green-400 hover:text-green-300"
-                  >
-                    <FontAwesomeIcon icon={faDownload} />
-                  </a>
-                )}
-                {proj.screenshots && (
-                  <button
-                    title="Preview"
-                    onClick={() => openModal(proj)}
-                    className="text-white hover:text-blue-400 cursor-pointer"
-                  >
-                    <FontAwesomeIcon icon={faEye} />
-                  </button>
-                )}
+                <h4 className="text-xl font-semibold text-blue-100 mb-2">
+                  {proj.name}
+                </h4>
+
+                <p className="text-sm text-blue-200/80 mb-6 leading-relaxed">
+                  {proj.description}
+                </p>
+
+                <div className="flex justify-center gap-6 mt-auto text-lg z-100">
+                  {proj.website && (
+                    <a
+                      href={proj.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-cyan-300 transition cursor-pointer"
+                    >
+                      <FontAwesomeIcon icon={faExternalLink} />
+                    </a>
+                  )}
+
+                  {proj.github && (
+                    <a
+                      href={proj.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-white transition cursor-pointer"
+                    >
+                      <FontAwesomeIcon icon={faGithub} />
+                    </a>
+                  )}
+
+                  {proj.apk && (
+                    <a
+                      href={proj.apk}
+                      download
+                      className="hover:text-green-400 transition cursor-pointer"
+                    >
+                      <FontAwesomeIcon icon={faDownload} />
+                    </a>
+                  )}
+
+                  {proj.screenshots && (
+                    <button
+                      onClick={() => openModal(proj)}
+                      className="hover:text-blue-400 transition cursor-pointer"
+                    >
+                      <FontAwesomeIcon icon={faEye} />
+                    </button>
+                  )}
+                </div>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Modal with Swiper Slider */}
-      {selectedProject && (
-        <Dialog
-          open={isOpen}
-          onClose={() => setIsOpen(false)}
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+      {/* Modal */}
+      <Dialog
+        open={isOpen}
+        onClose={() => setIsOpen(false)}
+        className="fixed inset-0 z-50 flex items-center justify-center"
+      >
+        <div className="absolute inset-0 bg-black/70" />
+
+        <motion.div
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="relative bg-blue-950/90 backdrop-blur-xl
+            border border-blue-800/60 rounded-2xl
+            p-5 w-full max-w-lg shadow-2xl"
         >
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="bg-gray-900 p-5 rounded-lg w-full max-w-sm sm:max-w-md md:max-w-lg"
+          <h3 className="text-lg mb-4 text-center text-white">
+            {selectedProject?.name}
+          </h3>
+
+          <Swiper
+            navigation
+            modules={[Navigation]}
+            className="h-[70vh]"
           >
-            <h3 className="text-lg sm:text-xl mb-4 text-white font-karla text-center">
-              {selectedProject.name}
-            </h3>
-            <Swiper
-              navigation={true}
-              modules={[Navigation]}
-              className="w-full h-[65vh] sm:h-[70vh] md:h-[75vh] flex items-center justify-center"
-            >
-              {selectedProject.screenshots?.map((src, i) => (
-                <SwiperSlide
-                  key={i}
-                  className="flex items-center justify-center"
-                >
-                  <img
-                    src={src}
-                    alt={`Screenshot ${i + 1}`}
-                    className="w-auto h-full max-h-full object-contain rounded-lg"
-                  />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="mt-4 px-4 py-2 bg-blue-800 hover:bg-blue-600 rounded-lg w-full sm:w-auto text-white cursor-pointer"
-            >
-              Close
-            </button>
-          </motion.div>
-        </Dialog>
-      )}
-    </div>
+            {selectedProject?.screenshots?.map((src: string, i: number) => (
+              <SwiperSlide key={i} className="flex items-center justify-center">
+                <img
+                  src={src}
+                  alt={`Screenshot ${i + 1}`}
+                  className="max-h-full rounded-xl object-contain"
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          <button
+            onClick={() => setIsOpen(false)}
+            className="mt-4 w-full py-2 rounded-lg
+              bg-blue-800 hover:bg-blue-600 transition text-white cursor-pointer"
+          >
+            Close
+          </button>
+        </motion.div>
+      </Dialog>
+    </section>
   );
 };
 
 export default Projects;
+

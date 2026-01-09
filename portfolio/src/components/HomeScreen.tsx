@@ -23,7 +23,7 @@ const HomeScreen = () => {
             View Resume
         </a>
       </div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-blue-400"></div>
+      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-blue-400"></div>
     </div>
   );
 };

@@ -1,7 +1,10 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowRight,
+  faChevronDown,
+} from "@fortawesome/free-solid-svg-icons";
 
 interface Experience {
   title: string;
@@ -13,7 +16,7 @@ interface Experience {
 const experiences: Experience[] = [
   {
     title: "Frontend Developer Intern",
-    company: "Outlines Research And Development PVT. LTD.",
+    company: "Outlines Research And Development Pvt. Ltd.",
     duration: "May 2023 - October 2023",
     responsibilities: [
       "Started with HTML, CSS, and JavaScript.",
@@ -23,7 +26,7 @@ const experiences: Experience[] = [
   },
   {
     title: "Software Developer",
-    company: "Outlines Research And Development PVT. LTD.",
+    company: "Outlines Research And Development Pvt. Ltd.",
     duration: "October 2023 - November 2024",
     responsibilities: [
       "Developed various websites using React, JavaScript, TypeScript, Tailwind CSS, and Bootstrap.",
@@ -52,102 +55,145 @@ const experiences: Experience[] = [
     responsibilities: [
       "Maintained and enhanced the Dark Web Monitoring (DWM) website, implementing new features and improvements for better performance and usability. ",
       "Deployed and added new functionalities to the DWM mobile application, further enhancing the app’s capabilities using Kotlin.",
+      "Identified and fixed security vulnerabilities reported through VAPT, strengthening application and website security."
     ],
   },
 ];
 
+
 const Experience = () => {
-  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <div
+    <section
       id="Experience"
-      className="py-16 bg-blue-950 flex items-center text-white bg-contain bg-no-repeat md:aspect-[16/9] aspect-[9/16] bg-[url('../src/assets/bg2_mob.png')] md:bg-[url('../src/assets/bg2.png')]"
+      className="relative py-24 bg-blue-950 text-white
+      bg-contain bg-no-repeat
+      bg-[url('../src/assets/bg2_mob.png')] md:bg-[url('../src/assets/bg2.png')]"
     >
-      <div className="w-full max-w-6xl px-6 mx-auto">
-        <h2 className="text-3xl sm:text-4xl text-center mb-12 font-cormorant tracking-wide text-white">
+      <div className="relative max-w-6xl mx-auto px-6">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl sm:text-4xl text-center mb-24 font-cormorant"
+        >
           Experience
-        </h2>
+        </motion.h2>
 
+        {/* Timeline container */}
         <div className="relative">
-          {/* Vertical Timeline Line */}
-          <div className="absolute left-1/2 top-0 w-1 bg-blue-800 h-full transform -translate-x-1/2"></div>
+          {/* Vertical current */}
+          <div className="absolute left-1/2 top-0 bottom-0 w-0.5
+            bg-linear-to-b from-cyan-400/0 via-cyan-400/60 to-cyan-400/0
+            hidden md:block"
+          />
 
-          <div className="space-y-12 font-karla">
+          <div className="space-y-28">
             {experiences.map((exp, index) => {
-              const isLeft = index % 2 === 0; // Alternating sides
+              const isLeft = index % 2 === 0;
+              const isOpen = open === index;
 
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, x: isLeft ? -50 : 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.3 }}
-                  className={`relative flex items-start ${
-                    isLeft ? "justify-start" : "justify-end"
-                  } group`}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                  className="relative flex md:items-center"
                 >
-                  {/* Timeline Dot */}
-                  <div className="absolute left-1/2 w-5 h-5 bg-blue-800 rounded-full transform -translate-x-1/2 border-4 border-blue-800 group-hover:scale-125 transition-all"></div>
+                  {/* Beacon */}
+                  <div className="absolute left-1/2 -translate-x-1/2 z-10 hidden md:flex">
+                    <div className="relative">
+                      <div className="absolute inset-0 rounded-full bg-cyan-400 opacity-30 animate-ping" />
+                      <div className="w-4 h-4 rounded-full bg-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.8)]" />
+                    </div>
+                  </div>
 
-                  {/* Experience Card */}
-                  <motion.div
-                    className={`relative bg-blue-900 p-6 rounded-lg shadow-lg w-full md:w-5/12 transition-all duration-300 cursor-pointer ${
-                      expandedIndex === index
-                        ? "scale-105 shadow-2xl"
-                        : "hover:scale-105 hover:shadow-xl"
-                    } ${isLeft ? "ml-auto" : "mr-auto"}`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 1 }}
-                    onClick={() =>
-                      setExpandedIndex(expandedIndex === index ? null : index)
-                    }
+                  {/* Card wrapper */}
+                  <div
+                    className={`w-full md:w-1/2 ${
+                      isLeft ? "md:pr-16 md:text-right" : "md:pl-16 md:ml-auto"
+                    }`}
                   >
-                    <h3 className="text-xl font-semibold text-white">
-                      {exp.title}
-                    </h3>
-                    <p className="text-white">
-                      {exp.company} {exp.duration}
-                    </p>
-
-                    {/* Animated Details */}
                     <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{
-                        height: expandedIndex === index ? "auto" : 0,
-                        opacity: expandedIndex === index ? 1 : 0,
-                      }}
-                      transition={{ duration: 0.4 }}
-                      className="overflow-hidden mt-3"
+                      whileHover={{ y: -6 }}
+                      onClick={() =>
+                        setOpen(isOpen ? null : index)
+                      }
+                      className="
+                        relative bg-white/10 backdrop-blur-lg
+                        border border-white/20
+                        rounded-2xl p-6
+                        cursor-pointer
+                        shadow-lg hover:shadow-cyan-500/30
+                        transition-all
+                      "
                     >
-                      <ul className="mt-3 space-y-2">
-                        {exp.responsibilities.map((resp, i) => (
-                          <motion.li
-                            key={i}
-                            initial={{ opacity: 0, x: -10 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ duration: 0.3, delay: i * 0.1 }}
-                            className="flex items-start space-x-3"
+                      {/* Soft glow */}
+                      <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-cyan-400/10 to-blue-600/10 opacity-0 hover:opacity-100 transition-opacity" />
+
+                      <h3 className="text-xl font-semibold">
+                        {exp.title}
+                      </h3>
+
+                      <p className="text-cyan-200 text-sm mt-1">
+                        {exp.company}
+                      </p>
+
+                      <p className="text-gray-300 text-xs">
+                        {exp.duration}
+                      </p>
+
+                      {/* Expand affordance */}
+                      <div className="mt-5 flex items-center justify-between text-sm text-cyan-300">
+                        <span>
+                          {isOpen ? "Hide details" : "Explore role"}
+                        </span>
+                        <motion.span
+                          animate={{ rotate: isOpen ? 180 : 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          <FontAwesomeIcon icon={faChevronDown} />
+                        </motion.span>
+                      </div>
+
+                      {/* Expand content */}
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.ul
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            transition={{ duration: 0.35 }}
+                            className="mt-4 space-y-3 text-sm text-gray-300 overflow-hidden"
                           >
-                            <span className="text-gray-300 text-lg">
-                              <FontAwesomeIcon icon={faArrowRight} />
-                            </span>
-                            <span className="text-gray-300 leading-relaxed">
-                              {resp}
-                            </span>
-                          </motion.li>
-                        ))}
-                      </ul>
+                            {exp.responsibilities.map((item, i) => (
+                              <li key={i} className="flex gap-3">
+                                <FontAwesomeIcon
+                                  icon={faArrowRight}
+                                  className="text-cyan-300 mt-1"
+                                />
+                                <span>{item}</span>
+                              </li>
+                            ))}
+                          </motion.ul>
+                        )}
+                      </AnimatePresence>
                     </motion.div>
-                  </motion.div>
+                  </div>
                 </motion.div>
               );
             })}
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
 export default Experience;
+
+

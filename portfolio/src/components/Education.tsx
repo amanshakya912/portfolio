@@ -13,7 +13,7 @@ const educationData = [
     year: "2077",
     degree: "+2 in Science",
     college: "St. Xavier’s School",
-    location: "Jawalakhel,  Lalitpur",
+    location: "Jawalakhel, Lalitpur",
   },
   {
     year: "2074",
@@ -25,45 +25,80 @@ const educationData = [
 
 const Education = () => {
   return (
-    <div id="Education" className="py-12 md:py-16 bg-blue-950 bg-cover md:aspect-[16/9] aspect-[9/16] bg-[url('../src/assets/bg3mob.png')] md:bg-[url('../src/assets/bg3.png')]">
+    <section
+      id="Education"
+      className="relative py-14 md:py-20 bg-blue-950 bg-cover
+      bg-[url('../src/assets/bg3mob.png')] md:bg-[url('../src/assets/bg3.png')]"
+    >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl sm:text-4xl text-center text-white mb-10 font-cormorant">
+        {/* Title */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-3xl sm:text-4xl text-center text-white mb-16 font-cormorant"
+        >
           Education
-        </h2>
+        </motion.h2>
 
-        <div className="relative border-l-4 border-blue-800 pl-6 space-y-8">
+        {/* Timeline */}
+        <div className="relative pl-10 space-y-12">
+          {/* Ocean line */}
+          <div className="absolute left-[18px] top-0 h-full w-[3px] rounded-full bg-linear-to-b from-cyan-400/60 via-blue-500/40 to-cyan-400/60 shadow-[0_0_12px_rgba(34,211,238,0.6)]" />
+
           {educationData.map((edu, index) => (
             <motion.div
               key={index}
-              className="relative bg-white shadow-md rounded-xl p-5 sm:p-6 md:p-7 hover:shadow-2xl transition-all duration-300 font-karla cursor-pointer"
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
               viewport={{ once: true }}
+              className="relative"
             >
               {/* Icon */}
-              <div className="absolute -left-8 sm:-left-10 top-1/2 transform -translate-y-1/2 bg-blue-800 text-white p-3 sm:p-4 rounded-full">
-                <FontAwesomeIcon icon={faGraduationCap} size="lg" />
+              <div className="absolute -left-[2.7rem] top-6">
+                <div className="w-12 h-12 rounded-full bg-blue-900 border border-cyan-400/40 flex items-center justify-center shadow-[0_0_15px_rgba(34,211,238,0.7)]">
+                  <FontAwesomeIcon
+                    icon={faGraduationCap}
+                    className="text-cyan-300 text-lg"
+                  />
+                </div>
               </div>
 
-              {/* Text Content */}
-              <p className="text-gray-600 text-sm sm:text-base">{edu.year}</p>
-              <h3 className="text-lg sm:text-xl font-semibold text-blue-900">
-                {edu.degree}
-              </h3>
-              <p className="text-gray-700 text-sm sm:text-base">
-                {edu.college}
-              </p>
-              {edu.location && (
+              {/* Card */}
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.25 }}
+                className="
+                  bg-white/95 backdrop-blur-md
+                  border border-white/30
+                  rounded-2xl p-6 sm:p-7
+                  shadow-lg hover:shadow-cyan-500/20
+                  font-karla
+                "
+              >
+                <p className="text-cyan-700 text-sm font-medium">
+                  {edu.year}
+                </p>
+
+                <h3 className="text-lg sm:text-xl font-semibold text-blue-900 mt-1">
+                  {edu.degree}
+                </h3>
+
+                <p className="text-gray-700 text-sm sm:text-base">
+                  {edu.college}
+                </p>
+
                 <p className="text-gray-500 text-xs sm:text-sm">
                   {edu.location}
                 </p>
-              )}
+              </motion.div>
             </motion.div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

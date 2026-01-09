@@ -1,13 +1,13 @@
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEnvelope,
   faMapMarkedAlt,
   faPhone,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { motion } from "framer-motion";
-// import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaLinkedin } from "react-icons/fa";
-import { useState } from "react";
+import { useForm } from "@formspree/react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +15,7 @@ const Contact = () => {
     email: "",
     message: "",
   });
-  const [success, setSuccess] = useState(false);
+  const [state, handleSubmit] = useForm("xwvvelrr");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -23,151 +23,172 @@ const Contact = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSuccess(true);
-    setTimeout(() => setSuccess(false), 3000);
-    setFormData({ name: "", email: "", message: "" });
-  };
-
   return (
-    <>
-      {/* Contact Section */}
-      <div id="Contact" className="relative">
-        <section className="py-16 bg-blue-950 text-white font-karla bg-cover md:aspect-[16/9] aspect-[9/16] bg-[url('../src/assets/bg5mob.png')] md:bg-[url('../src/assets/bg5.png')]">
-          <div className="max-w-6xl mx-auto px-6">
-            <h2 className="text-3xl md:text-4xl font-cormorant text-center mb-12">
-              Contact Me
-            </h2>
-            <div className="grid md:grid-cols-2 gap-12">
-              {/* Contact Form */}
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                className="bg-blue-900 p-5 rounded-lg shadow-md z-50"
-              >
-                <h3 className="text-xl font-semibold mb-4">Get in Touch</h3>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-gray-white">Name</label>
+    <section
+      id="Contact"
+      className="relative bg-blue-950 text-white pt-30 pb-5 
+        bg-cover bg-no-repeat
+        bg-[url('../src/assets/bg5mob.png')]
+        md:bg-[url('../src/assets/bg5.png')]"
+    >
+      {/* Overlay for readability */}
+      <div className="absolute inset-0 bg-blue-950/70" />
+
+      <div className="relative max-w-6xl mx-auto px-6 font-karla">
+        {/* Heading */}
+        <h2 className="text-3xl md:text-4xl text-center font-cormorant mb-4">
+          Contact Me
+        </h2>
+
+        <div className="mx-auto mb-12 h-0.5 w-28 bg-linear-to-r from-transparent via-cyan-400 to-transparent" />
+
+        <div className="grid md:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative rounded-2xl p-px
+              bg-linear-to-br from-blue-400/30 via-cyan-300/10 to-transparent"
+          >
+            <div
+              className="rounded-2xl bg-blue-950/85 backdrop-blur-xl
+              border border-blue-800/50 p-6"
+            >
+              <h3 className="text-xl font-semibold mb-6 text-blue-100">
+                Get in Touch
+              </h3>
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                {["name", "email"].map((field) => (
+                  <div key={field}>
+                    <label className="block mb-1 capitalize">{field}</label>
+                    <input type="text" name="_gotcha" className="hidden" />
+
                     <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
+                      type={field === "email" ? "email" : "text"}
+                      name={field}
+                      value={(formData as any)[field]}
                       onChange={handleChange}
                       required
-                      placeholder="Enter Your Name"
-                      className="w-full p-2 mt-1 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black placeholder:text-gray-400"
+                      placeholder={`Enter your ${field}`}
+                      className="w-full rounded-lg px-3 py-2
+                        bg-blue-900/60 border border-blue-800/60
+                        focus:outline-none focus:ring-2 focus:ring-cyan-400
+                        text-white placeholder:text-blue-300"
                     />
                   </div>
-                  <div>
-                    <label className="block text-gray-white">Email</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      placeholder="Enter Your Email"
-                      className="w-full p-2 mt-1 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black placeholder:text-gray-400"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-gray-white">Message</label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      placeholder="Send a Message"
-                      className="w-full p-2 mt-1 h-28 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-black placeholder:text-gray-400"
-                    ></textarea>
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full py-2 bg-blue-600 hover:bg-blue-700 cursor-pointer transition-all rounded-lg font-semibold"
-                  >
-                    Send Message
-                  </button>
-                  {success && (
-                    <p className="text-green-400 text-sm mt-2">
-                        Message sent successfully!
-                    </p>
-                    )}
-                </form>
-              </motion.div>
+                ))}
 
-              {/* Contact Info & Links */}
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5 }}
-                className="space-y-6 z-50 md:text-start text-center"
+                <div>
+                  <label className="block mb-1">Message</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    placeholder="Write your message..."
+                    className="w-full h-28 rounded-lg px-3 py-2
+                      bg-blue-900/60 border border-blue-800/60
+                      focus:outline-none focus:ring-2 focus:ring-cyan-400
+                      text-white placeholder:text-blue-300"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full py-2 rounded-lg cursor-pointer
+                    bg-linear-to-r from-cyan-500 to-blue-600
+                    hover:opacity-90 transition font-semibold"
+                >
+                  Send Message
+                </button>
+
+                {state.succeeded && (
+                  <p className="text-cyan-400 text-sm">
+                    Message sent successfully!
+                  </p>
+                )}
+              </form>
+            </div>
+          </motion.div>
+
+          {/* Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="space-y-6 text-center md:text-left"
+          >
+            <h3 className="text-xl font-semibold text-blue-100">
+              Contact Information
+            </h3>
+
+            <InfoRow icon={faEnvelope}>
+              <a
+                href="mailto:amanshakya9912@gmail.com"
+                className="hover:text-cyan-300 transition"
               >
-                <h3 className="text-xl font-semibold">Contact Information</h3>
-                <div className="flex items-center justify-center md:justify-start space-x-4">
-                  <FontAwesomeIcon icon={faEnvelope} />
-                  <a
-                    title="Mail to: amanshakya9912@gmail.com"
-                    className="cursor-pointer hover:text-blue-400"
-                    href="mailto: amanshakya9912@gmail.com"
-                  >
-                    amanshakya9912@gmail.com
-                  </a>
-                </div>
-                <div className="flex items-center justify-center md:justify-start space-x-4">
-                  <FontAwesomeIcon icon={faPhone} />
-                  <a
-                    title="Call at +977-9818313576"
-                    className="cursor-pointer hover:text-blue-400"
-                    href="tel:+977-9818313576"
-                  >
-                    +977-9818313576
-                  </a>
-                </div>
-                <div className="flex items-center justify-center md:justify-start space-x-4">
-                  <FontAwesomeIcon icon={faMapMarkedAlt} />
+                amanshakya9912@gmail.com
+              </a>
+            </InfoRow>
 
-                  <span>Lalitpur, Nepal</span>
-                </div>
+            <InfoRow icon={faPhone}>
+              <a
+                href="tel:+9779818313576"
+                className="hover:text-cyan-300 transition"
+              >
+                +977-9818313576
+              </a>
+            </InfoRow>
 
-                <h3 className="text-xl font-semibold mt-6">Find Me Online</h3>
-                <div className="flex space-x-4 justify-center md:justify-start">
-                  <a
-                    href="https://github.comamanshakya912"
-                    title="Github"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-white hover:text-blue-400"
-                  >
-                    <FontAwesomeIcon className="text-xl" icon={faGithub} />
-                  </a>
-                  <a
-                    href="https://linkedin.com/in/amanshakya912"
-                    title="LinkedIn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-gray-white hover:text-blue-400"
-                  >
-                    <FontAwesomeIcon className="text-xl" icon={faLinkedin} />
-                  </a>
-                </div>
-              </motion.div>
+            <InfoRow icon={faMapMarkedAlt}>Lalitpur, Nepal</InfoRow>
+
+            <h3 className="text-xl font-semibold mt-8 text-blue-100">
+              Find Me Online
+            </h3>
+
+            <div className="flex justify-center md:justify-start gap-6 text-xl">
+              <SocialLink
+                href="https://github.com/amanshakya912"
+                icon={faGithub}
+              />
+              <SocialLink
+                href="https://linkedin.com/in/amanshakya912"
+                icon={faLinkedin}
+              />
             </div>
-            
-          </div>
-        </section>
+          </motion.div>
+        </div>
 
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black"></div>
-        <div className="absolute bottom-4 text-white w-full">
-            <p className="text-center">
-              © {new Date().getFullYear()} Aman Shakya. All rights reserved.
-            </p>
-            </div>
+        {/* Footer */}
+        <div className="mt-20 text-center text-sm text-blue-300">
+          © {new Date().getFullYear()} Aman Shakya. All rights reserved.
+        </div>
       </div>
-    </>
+    </section>
   );
 };
+
+/* Small helpers for cleanliness */
+const InfoRow = ({ icon, children }: any) => (
+  <div className="flex items-center justify-center md:justify-start gap-4">
+    <FontAwesomeIcon icon={icon} className="text-cyan-400" />
+    <span>{children}</span>
+  </div>
+);
+
+const SocialLink = ({ href, icon }: any) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:text-cyan-300 transition"
+  >
+    <FontAwesomeIcon icon={icon} />
+  </a>
+);
 
 export default Contact;

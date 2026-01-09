@@ -15,7 +15,11 @@ import {
   faFlutter,
   faDocker,
 } from "@fortawesome/free-brands-svg-icons";
-import { faDatabase, faCogs, faToolbox } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDatabase,
+  faCogs,
+  faToolbox,
+} from "@fortawesome/free-solid-svg-icons";
 
 // Define skill categories and types
 type Skill = {
@@ -62,52 +66,96 @@ const Skills: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<keyof typeof skills>(
     "Programming Languages"
   );
+  const drift = {
+    animate: { y: [0, -4, 0] },
+    transition: {
+      duration: 6,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  };
 
   return (
-    <div id="Skills" className="py-16 bg-blue-950 ">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 font-karla">
-        <h2 className="text-3xl sm:text-4xl text-center text-white mb-10 font-cormorant">
-          Skills
-        </h2>
+    <section id="Skills" className="py-16 bg-blue-950 relative overflow-hidden">
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-8">
-          {Object.keys(skills).map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category as keyof typeof skills)}
-              className={`px-5 py-2 rounded-full text-sm sm:text-base font-medium transition-all duration-300 cursor-pointer ${
-                activeCategory === category
-                  ? "bg-blue-900 text-white"
-                  : "bg-gray-200 text-blue-900 hover:bg-blue-700 hover:text-white"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 font-karla">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="text-3xl sm:text-4xl text-center text-white mb-12 font-cormorant"
+        >
+          Skills
+        </motion.h2>
+
+        {/* Category Buoys */}
+        <div className="flex flex-wrap justify-center gap-4 mb-12">
+          {Object.keys(skills).map((category) => {
+            const active = activeCategory === category;
+            return (
+              <motion.button
+                key={category}
+                onClick={() =>
+                  setActiveCategory(category as keyof typeof skills)
+                }
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.95 }}
+                className={`
+                  px-6 py-2 rounded-full text-sm sm:text-base font-medium
+                  backdrop-blur-md border transition-all duration-300 cursor-pointer
+                  ${
+                    active
+                      ? "bg-cyan-500/20 border-cyan-400 text-white shadow-[0_0_15px_rgba(34,211,238,0.7)]"
+                      : "bg-white/10 border-white/20 text-cyan-100 hover:bg-cyan-400/20"
+                  }
+                `}
+              >
+                {category}
+              </motion.button>
+            );
+          })}
         </div>
 
-        {/* Skills Grid */}
+        {/* Skill Reef Grid */}
         <motion.div
           key={activeCategory}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.4 }}
           className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6"
         >
-          {skills[activeCategory].map((skill) => (
+          {skills[activeCategory].map((skill, index) => (
             <motion.div
               key={skill.name}
-              whileHover={{ scale: 1.1 }}
-              className="bg-white shadow-md rounded-lg p-4 flex flex-col items-center justify-center hover:shadow-lg transition-all duration-300 cursor-pointer"
+              {...drift}
+              transition={{ ...drift.transition, delay: index * 0.2 }}
+              whileHover={{ y: -8 }}
+              className="
+                relative group cursor-pointer
+                bg-white/10 backdrop-blur-lg
+                border border-white/20
+                rounded-2xl p-5
+                flex flex-col items-center justify-center
+                shadow-lg
+              "
             >
-              <FontAwesomeIcon icon={skill.icon} className="text-4xl text-blue-800 mb-2" />
-              <p className="text-lg text-blue-900">{skill.name}</p>
+              {/* Glow */}
+              <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-cyan-400/20 to-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity blur-xl" />
+
+              <FontAwesomeIcon
+                icon={skill.icon}
+                className="relative z-10 text-4xl text-cyan-300 mb-3"
+              />
+
+              <p className="relative z-10 text-base sm:text-lg text-white text-center">
+                {skill.name}
+              </p>
             </motion.div>
           ))}
         </motion.div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header className="absolute top-0 right-0 z-50 w-full bg-transparent">
       <div className="container mx-auto flex justify-between items-center p-5">
-        <div className="text-2xl text-blue-950 font-cormorant py-1">ADTS</div>
+        <div className="text-2xl text-blue-950 font-cormorant py-1 font-bold">ADTS</div>
 
         <nav className="hidden md:flex space-x-4 text-lg text-blue-950 font-karla">
           {[
