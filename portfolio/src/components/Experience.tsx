@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowRight,
-  faChevronDown,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 interface Experience {
   title: string;
@@ -55,11 +52,10 @@ const experiences: Experience[] = [
     responsibilities: [
       "Maintained and enhanced the Dark Web Monitoring (DWM) website, implementing new features and improvements for better performance and usability. ",
       "Deployed and added new functionalities to the DWM mobile application, further enhancing the app’s capabilities using Kotlin.",
-      "Identified and fixed security vulnerabilities reported through VAPT, strengthening application and website security."
+      "Identified and fixed security vulnerabilities reported through VAPT, strengthening application and website security.",
     ],
   },
 ];
-
 
 const Experience = () => {
   const [open, setOpen] = useState<number | null>(null);
@@ -85,13 +81,14 @@ const Experience = () => {
         {/* Timeline container */}
         <div className="relative">
           {/* Vertical current */}
-          <div className="absolute left-1/2 top-0 bottom-0 w-0.5
+          <div
+            className="absolute left-1/2 top-0 bottom-0 w-0.5
             bg-linear-to-b from-cyan-400/0 via-cyan-400/60 to-cyan-400/0
             hidden md:block"
           />
 
           <div className="space-y-28">
-            {experiences.map((exp, index) => {
+            {[...experiences].reverse().map((exp, index) => {
               const isLeft = index % 2 === 0;
               const isOpen = open === index;
 
@@ -120,9 +117,7 @@ const Experience = () => {
                   >
                     <motion.div
                       whileHover={{ y: -6 }}
-                      onClick={() =>
-                        setOpen(isOpen ? null : index)
-                      }
+                      onClick={() => setOpen(isOpen ? null : index)}
                       className="
                         relative bg-white/10 backdrop-blur-lg
                         border border-white/20
@@ -135,23 +130,17 @@ const Experience = () => {
                       {/* Soft glow */}
                       <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-cyan-400/10 to-blue-600/10 opacity-0 hover:opacity-100 transition-opacity" />
 
-                      <h3 className="text-xl font-semibold">
-                        {exp.title}
-                      </h3>
+                      <h3 className="text-xl font-semibold">{exp.title}</h3>
 
                       <p className="text-cyan-200 text-sm mt-1">
                         {exp.company}
                       </p>
 
-                      <p className="text-gray-300 text-xs">
-                        {exp.duration}
-                      </p>
+                      <p className="text-gray-300 text-xs">{exp.duration}</p>
 
                       {/* Expand affordance */}
                       <div className="mt-5 flex items-center justify-between text-sm text-cyan-300">
-                        <span>
-                          {isOpen ? "Hide details" : "Explore role"}
-                        </span>
+                        <span>{isOpen ? "Hide details" : "Explore role"}</span>
                         <motion.span
                           animate={{ rotate: isOpen ? 180 : 0 }}
                           transition={{ duration: 0.3 }}
@@ -195,5 +184,3 @@ const Experience = () => {
 };
 
 export default Experience;
-
-
