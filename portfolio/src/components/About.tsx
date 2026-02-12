@@ -45,13 +45,11 @@ const About = () => {
                 Hi there, I am Aman Shakya
               </span>
               , an enthusiastic, ambitious and diligent software developer with
-              a strong background in web and mobile application development who
-              is consistently seeking opportunities to learn and develop skills
-              and knowledge. Skilled in React, Next.js, Django, Laravel, and
-              Flutter, with strong expertise in API integration, backend
-              services, and DevOps practices. Passionate about building secure,
-              scalable, and user-focused applications while continuously
-              learning and adapting to new technologies.
+              experience building and shipping production-ready web and mobile
+              applications. Strong background in full-stack development,
+              security-focused systems, and API-driven architectures.
+              Experienced in developing end-to-end products, with a focus on
+              scalability, performance, and secure application design.
             </p>
           </motion.div>
         </motion.div>
