@@ -1,7 +1,7 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRight, faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRight, faChevronDown, faBriefcase } from "@fortawesome/free-solid-svg-icons";
 
 interface Experience {
   title: string;
@@ -18,7 +18,7 @@ const experiences: Experience[] = [
     responsibilities: [
       "Started with HTML, CSS, and JavaScript.",
       "Transitioned to React with TypeScript and JavaScript.",
-      "Worked with Bootstrap and Tailwind CSS for CSS.",
+      "Worked with Bootstrap and Tailwind CSS for styling.",
     ],
   },
   {
@@ -35,13 +35,13 @@ const experiences: Experience[] = [
     ],
   },
   {
-    title: "Software Developer intern",
+    title: "Software Developer Intern",
     company: "Green Tick Nepal Pvt. Ltd.",
     duration: "March 2025 - July 2025",
     responsibilities: [
-      "Developed and integrated REST APIs using Django, handling database interactions and connecting backend services with a Next.js frontend",
+      "Developed and integrated REST APIs using Django, handling database interactions and connecting backend services with a Next.js frontend.",
       "Upgraded and maintained the Dark Web Monitoring (DWM) website, improving functionality and performance.",
-      "Built a cross-platform mobile application for the DWM system using Flutter, enhancing accessibility for users.",
+      "Built a cross-platform mobile application for the DWM system using Flutter.",
       "Created dark web monitoring reports to detect and analyze potential breaches for specified domains.",
     ],
   },
@@ -50,8 +50,8 @@ const experiences: Experience[] = [
     company: "Green Tick Nepal Pvt. Ltd.",
     duration: "July 2025 - Present",
     responsibilities: [
-      "Maintained and enhanced the Dark Web Monitoring (DWM) website, implementing new features and improvements for better performance and usability. ",
-      "Deployed and added new functionalities to the DWM mobile application, further enhancing the app’s capabilities using Kotlin.",
+      "Maintained and enhanced the Dark Web Monitoring (DWM) website, implementing new features and improvements.",
+      "Deployed and added new functionalities to the DWM mobile application using Kotlin.",
       "Identified and fixed security vulnerabilities reported through VAPT, strengthening application and website security.",
     ],
   },
@@ -59,35 +59,30 @@ const experiences: Experience[] = [
 
 const Experience = () => {
   const [open, setOpen] = useState<number | null>(null);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section
       id="Experience"
-      className="relative py-24 bg-blue-950 text-white
-      bg-contain bg-no-repeat
-      bg-[url('../src/assets/bg2_mob.png')] md:bg-[url('../src/assets/bg2.png')]"
-    >
-      <div className="relative max-w-6xl mx-auto px-6">
+      ref={ref}
+      className="relative py-20 md:py-28 bg-blue-950 caustic-sweep"
+    >      <div className="relative z-10 max-w-5xl mx-auto px-6">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-3xl sm:text-4xl text-center mb-24 font-cormorant"
+          className="text-4xl md:text-5xl text-center text-white mb-20 font-cormorant"
         >
           Experience
         </motion.h2>
 
-        {/* Timeline container */}
         <div className="relative">
-          {/* Vertical current */}
-          <div
-            className="absolute left-1/2 top-0 bottom-0 w-0.5
-            bg-linear-to-b from-cyan-400/0 via-cyan-400/60 to-cyan-400/0
-            hidden md:block"
-          />
+          {/* Center line */}
+          <div className="absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-[2px]
+            bg-gradient-to-b from-cyan-400/50 via-blue-500/20 to-transparent" />
 
-          <div className="space-y-28">
+          <div className="space-y-16">
             {[...experiences].reverse().map((exp, index) => {
               const isLeft = index % 2 === 0;
               const isOpen = open === index;
@@ -96,77 +91,79 @@ const Experience = () => {
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
-                  className="relative flex md:items-center"
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  className="relative"
                 >
-                  {/* Beacon */}
-                  <div className="absolute left-1/2 -translate-x-1/2 z-10 hidden md:flex">
+                  {/* Beacon dot */}
+                  <div className={`absolute top-6 z-10
+                    ${isLeft ? 'left-6 md:left-1/2 -translate-x-1/2' : 'left-6 md:left-1/2 -translate-x-1/2'}`}
+                  >
                     <div className="relative">
-                      <div className="absolute inset-0 rounded-full bg-cyan-400 opacity-30 animate-ping" />
-                      <div className="w-4 h-4 rounded-full bg-cyan-300 shadow-[0_0_15px_rgba(34,211,238,0.8)]" />
+                      <div className="absolute inset-0 rounded-full bg-cyan-400/30 animate-ping" />
+                      <div className="w-3 h-3 rounded-full bg-cyan-300 shadow-[0_0_12px_rgba(34,211,238,0.8)]" />
                     </div>
                   </div>
 
-                  {/* Card wrapper */}
-                  <div
-                    className={`w-full md:w-1/2 ${
-                      isLeft ? "md:pr-16 md:text-right" : "md:pl-16 md:ml-auto"
-                    }`}
+                  {/* Card */}
+                  <div className={`ml-14 md:ml-0 md:w-[calc(50%-2rem)]
+                    ${isLeft ? 'md:mr-auto md:pr-0' : 'md:ml-auto md:pl-0'}`}
                   >
                     <motion.div
-                      whileHover={{ y: -6 }}
+                      whileHover={{ y: -4 }}
                       onClick={() => setOpen(isOpen ? null : index)}
-                      className="
-                        relative bg-white/10 backdrop-blur-lg
-                        border border-white/20
-                        rounded-2xl p-6
-                        cursor-pointer
-                        shadow-lg hover:shadow-cyan-500/30
-                        transition-all
-                      "
+                      className="relative bg-white/[0.05] backdrop-blur-lg
+                        border border-white/[0.1] rounded-2xl p-6
+                        cursor-pointer hover:border-cyan-400/30
+                        hover:bg-white/[0.07] transition-all duration-300
+                        before:absolute before:inset-0 before:rounded-2xl
+                        before:bg-gradient-to-br before:from-cyan-400/5 before:to-transparent
+                        before:opacity-0 hover:before:opacity-100 before:transition-opacity before:pointer-events-none"
                     >
-                      {/* Soft glow */}
-                      <div className="absolute inset-0 rounded-2xl bg-linear-to-br from-cyan-400/10 to-blue-600/10 opacity-0 hover:opacity-100 transition-opacity" />
+                      <div className="flex items-start gap-3">
+                        <div className="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <FontAwesomeIcon icon={faBriefcase} className="text-cyan-300 text-sm" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-lg font-semibold text-white">{exp.title}</h3>
+                          <p className="text-cyan-200/70 text-sm mt-0.5">{exp.company}</p>
+                          <p className="text-white/30 text-xs mt-1">{exp.duration}</p>
+                        </div>
+                      </div>
 
-                      <h3 className="text-xl font-semibold">{exp.title}</h3>
-
-                      <p className="text-cyan-200 text-sm mt-1">
-                        {exp.company}
-                      </p>
-
-                      <p className="text-gray-300 text-xs">{exp.duration}</p>
-
-                      {/* Expand affordance */}
-                      <div className="mt-5 flex items-center justify-between text-sm text-cyan-300">
-                        <span>{isOpen ? "Hide details" : "Explore role"}</span>
+                      <div className="mt-4 flex items-center gap-2 text-xs text-cyan-300/70">
+                        <span>{isOpen ? 'Collapse' : 'View details'}</span>
                         <motion.span
                           animate={{ rotate: isOpen ? 180 : 0 }}
                           transition={{ duration: 0.3 }}
                         >
-                          <FontAwesomeIcon icon={faChevronDown} />
+                          <FontAwesomeIcon icon={faChevronDown} className="text-[10px]" />
                         </motion.span>
                       </div>
 
-                      {/* Expand content */}
                       <AnimatePresence>
                         {isOpen && (
                           <motion.ul
                             initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
+                            animate={{ opacity: 1, height: 'auto' }}
                             exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.35 }}
-                            className="mt-4 space-y-3 text-sm text-gray-300 overflow-hidden"
+                            transition={{ duration: 0.3 }}
+                            className="mt-4 space-y-2.5 text-sm text-white/60 overflow-hidden font-karla"
                           >
                             {exp.responsibilities.map((item, i) => (
-                              <li key={i} className="flex gap-3">
+                              <motion.li
+                                key={i}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.08 }}
+                                className="flex gap-2.5"
+                              >
                                 <FontAwesomeIcon
                                   icon={faArrowRight}
-                                  className="text-cyan-300 mt-1"
+                                  className="text-cyan-400/60 mt-1 text-[10px] flex-shrink-0"
                                 />
                                 <span>{item}</span>
-                              </li>
+                              </motion.li>
                             ))}
                           </motion.ul>
                         )}
