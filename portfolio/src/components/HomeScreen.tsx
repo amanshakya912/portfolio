@@ -1,8 +1,6 @@
 import ocean from "../assets/ocean.mp4";
 import resume from "../assets/AmanShakyaCV.pdf";
 import { motion } from "framer-motion";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 const HomeScreen = () => {
   return (
